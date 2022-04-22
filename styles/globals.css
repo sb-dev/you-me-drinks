@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Londrina+Solid&display=swap');
+
+body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #FBF9EF;
+}
+
+#__next {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+ul.bullet-list li::before {
+  content: "\2022";
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+}
+
+ol > li::marker {
+  font-weight: bold;
+}
