@@ -1,0 +1,50 @@
+slug: recovery-pina-colada
+title: Recovery piña colada
+publicationType: RECIPE
+description: >
+  The flavour of a piña colada cocktail captured in a delicious recovery drink.
+primaryTags:
+  - name: smoothie
+    category: type
+    description: ""
+  - name: protein
+    category: goodFor
+    description: ""
+otherTags:
+  - name: sports
+    category: occasion
+    description: ""
+  - name: recovery
+    category: goodFor
+    description: ""
+  - name: after a workout
+    category: goodFor
+    description: ""
+goodFor: recovery · after workout
+time:
+  total: 5 minutes
+servings: "1"
+type: smoothie
+ingredients: 
+  - name: frozen pineapple
+    quantity: 1 cup (165g)
+    note: ""
+  - name: light coconut milk
+    quantity: 1 cup (240 ml)
+    note: ""
+  - name: orange juice
+    quantity: 1/2 cup (120 ml)
+    note: ""
+  - name: pineapple juice
+    quantity: 1/2 cup (120 ml)
+    note: ""
+  - name: protein powder
+    quantity: 1 scoop
+    note: ", optional"
+  - name: Toasted coconut
+    quantity: ""
+    note: ""
+method:
+  - instruction: "Add all the ingredients to a blender and blend until smooth."
+  - instruction: "Serve and garnish with the toasted coconut."
+author: "330802966348955847"

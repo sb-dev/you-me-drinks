@@ -12,7 +12,8 @@ A repository for plant based and alcohol-free drinks.
 
 ### Prerequisites
 
-* NPM: `npm install npm@latest -g`
+* NPM: `npm i -g npm@latest`
+* NPM: `npm i -g fauna-shell`
 
 ### Installation
 

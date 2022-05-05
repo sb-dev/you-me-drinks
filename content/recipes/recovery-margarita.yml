@@ -1,0 +1,52 @@
+slug: recovery-margarita
+title: Recovery margarita
+publicationType: RECIPE
+description: >
+  The flavour of a margarita cocktail captured in a delicious recovery drink.
+primaryTags:
+  - name: smoothie
+    category: type
+    description: ""
+  - name: protein
+    category: goodFor
+    description: ""
+otherTags:
+  - name: sports
+    category: occasion
+    description: ""
+  - name: recovery
+    category: goodFor
+    description: ""
+  - name: after a workout
+    category: goodFor
+    description: ""
+goodFor: recovery · after workout
+time:
+  total: 2 to 3 minutes
+servings: "1"
+type: smoothie
+ingredients: 
+  - name: ice
+    quantity: 1 cup (140g)
+    note: ""
+  - name: water
+    quantity: 1 cup (240 ml)
+    note: ""
+  - name: fresh lime juice
+    quantity: 1/4 cup (60 ml)
+    note: " (from 2 limes)"
+  - name: orange juice
+    quantity: 2 tablespoons
+    note: ""
+  - name: dates
+    quantity: "4"
+    note: ", pitted"
+  - name: protein powder
+    quantity: 1 scoop
+    note: ", optional"
+  - name: coconut oil
+    quantity: 1 teaspoon 
+    note: " (OF coconut milk)"
+method:
+  - instruction: "Add all the ingredients to a blender and blend until smooth"
+author: "330802966348955847"

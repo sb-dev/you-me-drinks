@@ -1,0 +1,82 @@
+recipeReads:
+  privileges:
+    - resource: Index
+      resourceName: allRecipes
+      actions:
+        read: true
+    - resource: Index
+      resourceName: findRecipeBySlug
+      actions:
+        read: true
+    - resource: Index
+      resourceName: allIngredients
+      actions:
+        read: true
+    - resource: Index
+      resourceName: allTags
+      actions:
+        read: true
+    - resource: Index
+      resourceName: findTagByName
+      actions:
+        read: true
+    - resource: Index
+      resourceName: findTagsByCategory
+      actions:
+        read: true
+    - resource: Index
+      resourceName: recipeIngredient_recipe_by_recipe
+      actions:
+        read: true
+    - resource: Index
+      resourceName: primary_tags_by_recipe
+      actions:
+        read: true
+    - resource: Index
+      resourceName: primary_tags_by_recipe_and_tag
+      actions:
+        read: true
+    - resource: Index
+      resourceName: primary_tags_by_tag
+      actions:
+        read: true
+    - resource: Index
+      resourceName: other_tags_by_recipe
+      actions:
+        read: true
+    - resource: Index
+      resourceName: other_tags_by_recipe_and_tag
+      actions:
+        read: true
+    - resource: Index
+      resourceName: other_tags_by_tag
+      actions:
+        read: true
+    - resource: Collection
+      resourceName: User
+      actions:
+        read: true
+    - resource: Collection
+      resourceName: Recipe
+      actions:
+        read: true
+    - resource: Collection
+      resourceName: Ingredient
+      actions:
+        read: true
+    - resource: Collection
+      resourceName: RecipeIngredient
+      actions:
+        read: true
+    - resource: Collection
+      resourceName: Tag
+      actions:
+        read: true
+    - resource: Collection
+      resourceName: primary_tags
+      actions:
+        read: true
+    - resource: Collection
+      resourceName: other_tags
+      actions:
+        read: true

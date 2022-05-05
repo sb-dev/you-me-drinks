@@ -1,0 +1,52 @@
+slug: frozen-matcha-latte
+title: Frozen matcha latte
+publicationType: RECIPE
+description: >
+  A drink rich in antioxidants.
+primaryTags:
+  - name: smoothie
+    category: type
+    description: ""
+  - name: protein
+    category: goodFor
+    description: ""
+otherTags:
+  - name: sports
+    category: occasion
+    description: ""
+  - name: recovery
+    category: goodFor
+    description: ""
+  - name: after a workout
+    category: goodFor
+    description: ""
+goodFor: recovery · after workout
+time:
+  total: 10 minutes
+servings: "1"
+type: smoothie
+ingredients: 
+  - name: almond milk
+    quantity: 1 cup (240 ml)
+    note: ", for colour and added nutrition"
+  - name: spinach
+    quantity: 1 cup (30g)
+    note: ""
+  - name: ice
+    quantity: 1/2 to 1 cup (70 to 140g)
+    note: ""
+  - name: frozen bananas
+    quantity: "1"
+    note: ", in chunks for ease of blending"
+  - name: vegan protein powder
+    quantity: 1 scoop
+    note: ", optional"
+  - name: matcha powder
+    quantity: 2 teaspoons
+    note: ""
+  - name: vanilla bean powder
+    quantity: 1/8 teaspoon
+    note: ""
+method:
+  - instruction: "Add all the ingredients to a blender and blend until smooth."
+author: "330802966348955847"

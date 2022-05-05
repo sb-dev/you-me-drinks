@@ -1,33 +1,18 @@
 import { FcLink } from "react-icons/fc";
 import Footer from "../components/footer";
+import { GraphQLClient } from 'graphql-request';
 import Head from "next/head";
 import Header from "../components/header";
-import Image from "next/image";
+import Link from 'next/link';
 import type { NextPage } from "next";
-import Placeholder from "../public/sample.png";
+import RecipeCard from "../components/recipeCard";
+import { findTagsByCategory } from '../graphql/queries/tagsByType';
+import getConfig from 'next/config';
+import { tagFullPath } from "../helpers/navigationHelpers";
 
-const people = [
-  {
-    name: "Recovery margarita",
-    title: "Paradigm Representative",
-    role: "Admin",
-    email: "janecooper@example.com",
-    telephone: "+1-202-555-0170",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  // More people...
-];
+const { serverRuntimeConfig } = getConfig()
 
-const categories = [
-  "Recipes By occasion",
-  "Recipes By ingredient",
-  "Recipes By method",
-  "Recipes By region",
-  "Holidays & Season",
-]
-
-const Home: NextPage = () => {
+const Home: NextPage = ({featuredRecipes, recipesByCategory, otherRecipes}: any) => {
   return (
     <div className="bg-[#FBF9EF]">
       <Head>
@@ -43,9 +28,11 @@ const Home: NextPage = () => {
               <h1 className="text-5xl mb-1.5 text-[#333333]">Recipes</h1>
               <p className="text-base mb-7 text-[#494949]">Original recipes, tested, tasted, and approved by YouMeDrinks.</p>
               <ul className="grid md:block space-y-4 md:space-y-0">
-                {categories.map((category) => (
-                  <li className="inline-block mr-12 text-lg text-[#2F537A] font-semibold" key={category}>
-                    <a href="#" className="underline underline-offset-2 hover:no-underline" >{category}</a>
+                {recipesByCategory.map((category: any) => (
+                  <li className="inline-block mr-12 text-lg text-[#2F537A] font-semibold capitalize" key={category.header}>
+                    <Link href={tagFullPath(category.header)} >
+                      <a className="underline underline-offset-2 hover:no-underline" >{category.header} Recipes</a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -54,19 +41,12 @@ const Home: NextPage = () => {
               role="list"
               className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
             >
-              {people.map((person) => (
+              {featuredRecipes.map((recipe: any) => (
                 <li
-                  key={person.email}
+                  key={recipe.slug}
                   className="group col-span-1 bg-white divide-gray-200 border border-[#B7B7B7] hover:shadow-l hover:-translate-x-[2px] hover:-translate-y-[2px]"
                 >
-                  <a href="#" className="flex flex-col">
-                    <Image src={Placeholder} alt="placeholder"/>
-                    <div className="p-4 flex-col space-y-2">
-                      <span className="flex text-sm uppercase text-[#387F90]">recipe</span>
-                      <span className="flex text-xl text-[#333333] leading-6 group-hover:underline decoration-[#58B4C3] decoration-[3px]">Recovery margarita</span>
-                      <span className="flex text-sm text-[#333333]">By YouMeDrinks</span>
-                    </div>
-                  </a>
+                  <RecipeCard recipe={recipe} />
                 </li>
               ))}
             </ul>
@@ -74,64 +54,35 @@ const Home: NextPage = () => {
         </section>
 
         <section className="mt-4 pb-4">
-          <div className="max-w-7xl mx-auto p-4">
-            <header className="mb-7">
-              <h1 className="text-2xl mb-1.5 text-[#2F537A]">
-                <a href="#" className="underline underline-offset-2 hover:no-underline"><FcLink className="inline mr-1" />Recipes</a>
+          {recipesByCategory.map((category: any) => (
+            <div className="max-w-7xl mx-auto p-4" key={category.name}>
+              <header className="mb-7">
+                <h1 className="text-2xl mb-1.5 text-[#2F537A]">
+                  <Link href={tagFullPath(category.header)} >
+                    <a href="#" className="underline underline-offset-2 hover:no-underline capitalize">
+                      <FcLink className="inline mr-1" />{category.header} Recipes
+                    </a>
+                  </Link>
                 </h1>
-            </header>
-            <ul
-              role="list"
-              className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-            >
-              {people.map((person) => (
-                <li
-                  key={person.email}
-                  className="group col-span-1 bg-white divide-gray-200 border border-[#B7B7B7] hover:shadow-l hover:-translate-x-[2px] hover:-translate-y-[2px]"
-                >
-                  <a href="#" className="flex flex-col">
-                    <Image src={Placeholder} alt="placeholder"/>
-                    <div className="p-4 flex-col space-y-2">
-                      <span className="flex text-sm uppercase text-[#387F90]">recipe</span>
-                      <span className="flex text-xl text-[#333333] leading-6 group-hover:underline decoration-[#58B4C3] decoration-[3px]">Recovery margarita</span>
-                      <span className="flex text-sm text-[#333333]">By YouMeDrinks</span>
-                    </div>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="max-w-7xl mx-auto p-4">
-            <header className="mb-7">
-              <h1 className="text-2xl mb-1.5 text-[#2F537A]">
-                <a href="#" className="underline underline-offset-2 hover:no-underline"><FcLink className="inline mr-1" />Recipes</a>
-                </h1>
-            </header>
-            <ul
-              role="list"
-              className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-            >
-              {people.map((person) => (
-                <li
-                  key={person.email}
-                  className="group col-span-1 bg-white divide-gray-200 border border-[#B7B7B7] hover:shadow-l hover:-translate-x-[2px] hover:-translate-y-[2px]"
-                >
-                  <a href="#" className="flex flex-col">
-                    <Image src={Placeholder} alt="placeholder"/>
-                    <div className="p-4 flex-col space-y-2">
-                      <span className="flex text-sm uppercase text-[#387F90]">recipe</span>
-                      <span className="flex text-xl text-[#333333] leading-6 group-hover:underline decoration-[#58B4C3] decoration-[3px]">Recovery margarita</span>
-                      <span className="flex text-sm text-[#333333]">By YouMeDrinks</span>
-                    </div>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+              </header>
+              <ul
+                role="list"
+                className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+              >
+                {category.recipes.map((recipe: any) => (
+                  <li
+                    key={recipe.slug}
+                    className="group col-span-1 bg-white divide-gray-200 border border-[#B7B7B7] hover:shadow-l hover:-translate-x-[2px] hover:-translate-y-[2px]"
+                  >
+                    <RecipeCard recipe={recipe} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </section>
 
-        <section className=" bg-white pb-4">
+        {otherRecipes.length > 0 && <section className=" bg-white pb-4">
           <div className="max-w-7xl mx-auto p-4">
             <header className="mt-2 mb-7">
               <h1 className="text-2xl mb-1.5 text-[#333333]">More recipes</h1>
@@ -140,29 +91,63 @@ const Home: NextPage = () => {
               role="list"
               className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
             >
-              {people.map((person) => (
+              {otherRecipes.map((recipe: any) => (
                 <li
-                  key={person.email}
+                  key={recipe.slug}
                   className="group col-span-1 bg-white divide-gray-200 border border-[#B7B7B7] hover:shadow-l hover:-translate-x-[2px] hover:-translate-y-[2px]"
                 >
-                  <a href="#" className="flex flex-col">
-                    <Image src={Placeholder} alt="placeholder"/>
-                    <div className="p-4 flex-col space-y-2">
-                      <span className="flex text-sm uppercase text-[#387F90]">recipe</span>
-                      <span className="flex text-xl text-[#333333] leading-6 group-hover:underline decoration-[#58B4C3] decoration-[3px]">Recovery margarita</span>
-                      <span className="flex text-sm text-[#333333]">By YouMeDrinks</span>
-                    </div>
-                  </a>
+                  <RecipeCard recipe={recipe} />
                 </li>
               ))}
             </ul>
           </div>
-        </section>
+        </section>}
       </main>
 
       <Footer />
     </div>
   );
 };
+
+export async function getStaticProps() {
+  const graphQLClient = new GraphQLClient(serverRuntimeConfig.graphqlEndpoint, {
+    headers: {
+      authorization: `Bearer ${serverRuntimeConfig.graphqlKey}`,
+    },
+  })
+  
+  const recipeData = await graphQLClient.request(findTagsByCategory, { category: 'type'})
+
+  const categories = recipeData.findTagsByCategory.data.map((tag: any) => {
+    return {
+      header: tag.name,
+      recipes: tag.mainRecipes.data
+    }
+  })
+
+  const allRecipes = categories.reduce((acc: any, category: any) => {
+    return [...acc, ...category.recipes]
+  }, [])
+
+  const recipesByCategory = categories.map((category: any) => {
+    return {
+      ...category,
+      recipes: category.recipes.slice(0, category.recipes.length < 4 ? category.recipes.length : 4)
+    }
+  })
+
+  const otherRecipes = categories.reduce((acc: any, category: any) => {
+    const other = category.recipes.length > 4 ? category.recipes.slice(3, category.recipes.length) : []
+    return [...acc, ...other]
+  }, [])
+
+  return { 
+    props: {
+      featuredRecipes: allRecipes.slice(0, allRecipes.length < 4 ? allRecipes.length : 4),
+      recipesByCategory: recipesByCategory,
+      otherRecipes: otherRecipes
+    }
+  };
+}
 
 export default Home;

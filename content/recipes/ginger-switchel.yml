@@ -1,0 +1,40 @@
+slug: ginger-switchel
+title: Ginger switchel
+publicationType: RECIPE
+description: >
+  A simple combination of simple, real ingredients.
+primaryTags:
+  - name: fermented drink
+    category: type
+    description: ""
+  - name: hydration
+    category: goodFor
+    description: ""
+otherTags:
+  - name: sports
+    category: occasion
+    description: ""
+goodFor: hydration · before, during, and after workout
+time:
+  total: 5 minutes to prep, plus resting overnight
+servings: "about 4 1/4 cups (1L)"
+type: fermented drink
+ingredients: 
+  - name: water
+    quantity: 4 cup (960 ml)
+    note: ""
+  - name: apple cider vinegar
+    quantity: 2 tablespoons
+    note: ""
+  - name: maple syrup
+    quantity: 2 tablespoons
+    note: ""
+  - name: ginger
+    quantity: 1-inch (2.5 cm) piece
+    note: ", minced"
+  - name: salt
+    quantity: 1/4 teaspoon
+    note: ", or to taste"
+method:
+  - instruction: "Shake all the ingredients together, refrigerate overnight, strain and drink."
+author: "330802966348955847"

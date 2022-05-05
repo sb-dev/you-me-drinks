@@ -1,0 +1,112 @@
+# Types
+
+type User {
+  email: String! @unique
+  name: String!
+  role: UserRole!
+}
+
+enum UserRole {
+  USER
+  ASSOCIATE
+  ADMIN
+}
+
+type Recipe {
+  slug: String! @unique
+  title: String!
+  publicationType: PublicationType!
+  description: String!
+  primaryTags: [Tag!] @relation(name: "primary_tags")
+  otherTags: [Tag!] @relation(name: "other_tags")
+  goodFor: String!
+  time: Times!
+  servings: String!
+  type: String!
+  ingredients: [RecipeIngredient!] @relation
+  method: [Method!]
+  notes: [Note!]
+  author: User!
+}
+
+enum PublicationType {
+  RECIPE
+  HOWTO
+  INGREDIENT
+  EQUIPMENT
+}
+
+type Tag {
+  name: String! @unique
+  category: String!
+  description: String!
+  mainRecipes: [Recipe!] @relation(name: "primary_tags")
+  otherRecipes: [Recipe!] @relation(name: "other_tags")
+}
+
+type Times @embedded {
+  total: String!
+}
+
+type RecipeIngredient {
+  recipe: Recipe!
+  ingredient: Ingredient!
+  quantity: String!
+  note: String!
+}
+
+type Ingredient {
+  name: String! @unique
+}
+
+type Method @embedded {
+  instruction: String!
+}
+
+type Note @embedded {
+  title: String!
+  content: String!
+}
+
+# Inputs
+
+input CreateUserInput {
+  email: String!
+  name: String!
+  password: String!
+  role: UserRole!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+# Queries
+
+type Query {
+  allRecipes: [Recipe!]!
+
+  allIngredients: [Ingredient!]!
+
+  allTags: [Tag!]!
+
+  findRecipeBySlug(
+    slug: String!
+  ): Recipe
+
+  findTagByName(
+    name: String!
+  ): Tag
+
+  findTagsByCategory(
+    category: String!
+  ): [Tag!]!
+}
+
+# Mutations
+
+type Mutation {
+  createUser(input: CreateUserInput): User! @resolver(name: "create_user")
+  loginUser(input: LoginUserInput): String! @resolver(name: "login_user")
+}
