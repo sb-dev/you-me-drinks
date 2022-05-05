@@ -2,7 +2,7 @@ export const RECIPE_PAGE = 'recipe'
 export const TAG_PAGE = 'tag'
 
 export const path = (value: String) => {
-  return value.replaceAll(' ', '-')
+  return value.replace(/ /g, '-')
 }
 
 export const tagPath = (tagName: String) => {
@@ -16,5 +16,5 @@ export const tagFullPath = (tagName: String) => {
 export const tagNameFromPath = (path: String) => {
   return path
           .replace('-recipes', '')
-          .replaceAll('-', ' ')
+          .replace(/-/g, ' ')
 }
