@@ -22,6 +22,7 @@ export const recipeBySlug = gql`
               slug
               title
               publicationType
+              type
               author {
                 name
               }

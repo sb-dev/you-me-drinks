@@ -1,9 +1,9 @@
 import { FcMenu, FcSearch } from "react-icons/fc";
 
 import { AiOutlineClose } from "react-icons/ai";
-import Book from "../public/book.png";
+import BookIcon from "../assets/icons/book-icon";
 import { Disclosure } from '@headlessui/react';
-import Drinks from "../public/cocktail.png";
+import Drinks from "../assets/icons/cocktail-icon";
 import Image from "next/image";
 import Link from 'next/link';
 
@@ -40,7 +40,7 @@ const Header = () => (
               <Link href="/">
                 <a href="#" className="flex-shrink-0 flex items-center text-3xl font-['Londrina_Solid'] space-x-1 text-[#284D76]">
                   <span className="mr-1 rotate-6">
-                    <Image src={Drinks} alt="drinks" height="42px" width="42px"/>
+                    <Drinks height="42px" width="42px"/>
                   </span>
                   <span className="rotate-3">you</span>
                   <span className="-rotate-2">me</span>
@@ -81,10 +81,10 @@ const Header = () => (
             <div className="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
               <button
                 type="button"
-                className="flex-shrink-0 px-1 pt-[4px] bg-white rounded-full text-[#284D76] hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#284D76]"
+                className="flex-shrink-0 px-1 pt-[4px]"
               >
                 <span className="sr-only">View saved recipes</span>
-                <Image src={Book} alt="book" height="32px" width="32px" />
+                <BookIcon height="32" width="32" />
               </button>
             </div>
           </div>
@@ -164,7 +164,8 @@ const Header = () => (
                 href="#"
                 className="flex items-center rounded-md py-2 px-3 text-base font-medium text-[#284D76]  hover:bg-[#FBF9EF]"
               >
-                <Image src={Book} alt="book" height="24px" width="24px" /> <span className="ml-2">View saved recipes</span>
+                <BookIcon height="24" width="24" disableHighlight={true} />
+                <span className="ml-2">View saved recipes</span>
               </Disclosure.Button>
               {/* {userNavigation.map((item) => (
                 <Disclosure.Button

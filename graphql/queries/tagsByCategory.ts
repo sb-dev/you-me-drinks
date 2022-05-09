@@ -11,6 +11,7 @@ export const findTagsByCategory = gql`
           data {
             slug
             title
+            type
             publicationType
             primaryTags {
               data {

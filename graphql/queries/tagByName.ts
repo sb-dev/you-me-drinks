@@ -12,6 +12,7 @@ export const tagByName = gql`
           slug
           title
           publicationType
+          type
           primaryTags {
             data {
               name
@@ -28,6 +29,7 @@ export const tagByName = gql`
           slug
           title
           publicationType
+          type
           primaryTags {
             data {
               name

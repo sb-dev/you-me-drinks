@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 
-import Blender from "../public/blender.png";
-import Bookmark from "../public/bookmark.png";
+import BookmarkIcon from "../assets/icons/bookmark-icon";
 import Footer from "./footer";
 import Head from 'next/head';
 import Header from './header';
 import Image from "next/image";
+import ImagePlaceholder from "../assets/image-placeholders/image-placeholder";
 import Link from 'next/link';
-import Send from "../public/send.png";
-import SmoothiePlaceholder from "../public/smoothie-placeholder.png";
-import ThumbsUp from "../public/thumbs-up.png";
-import Time from "../public/time.png";
+import MethodIcon from "../assets/icons/method-icon";
+import RecipeCard from './recipeCard';
+import SendIcon from "../assets/icons/send-icon";
+import ThumbsUpIcon from "../assets/icons/thumbs-up-icon";
+import TimeIcon from "../assets/icons/time-icon";
 import { tagFullPath } from '../helpers/navigationHelpers';
 import { useMediaQuery } from 'react-responsive';
 
@@ -23,6 +24,7 @@ const RecipePage = ({ recipe, relatedRecipes }: any) => {
   useEffect(() => {
     setImageLayout(isMediumScreen ? "fixed" : "responsive")
   }, [isMediumScreen])
+  
   return (
     <>
       <Head>
@@ -53,13 +55,8 @@ const RecipePage = ({ recipe, relatedRecipes }: any) => {
                 </ul>
               </nav>
               <div className="md:flex flex-column">
-                <div className="mb-3 md:mr-4">
-                  <Image
-                    src={SmoothiePlaceholder}
-                    alt="placeholder"
-                    layout={imageLayout}
-                    priority={true}
-                  />
+                <div className="mb-3 md:mr-4 md:h-[250px] md:w-[375px]">
+                  <ImagePlaceholder type={recipe.type} width="100%" height="100%"/>
                 </div>
                 <div>
                   <h1 className="text-5xl mb-3 capitalize">{recipe.title}</h1>
@@ -70,25 +67,16 @@ const RecipePage = ({ recipe, relatedRecipes }: any) => {
                     className="block w-full mb-4 md:inline-flex md:w-auto mr-4 items-center px-2 py-1 border border-[#284D76] text-lg md:text-sm font-medium rounded-sm shadow-sm text-[#385A80] bg-[#FBF9EF] hover:bg-[#F9D154] focus:outline-none"
                   >
                     <span className="mr-1">Save</span>
-                    <Image
-                      src={Bookmark}
-                      width="18"
-                      height="18"
-                      alt="Bookmark"
-                      layout="fixed"
-                    />
+                    <BookmarkIcon width="18" height="18" />
                   </button>
                   <button
                     type="button"
                     className="block w-full mb-4 md:inline-flex md:w-auto items-center px-2 py-1 border border-[#284D76] text-lg md:text-sm font-medium rounded-sm shadow-sm-red text-[#385A80] bg-[#FBF9EF] hover:bg-[#F9D154] focus:outline-none"
                   >
                     <span className="mr-1">Share</span>
-                    <Image
-                      src={Send}
+                    <SendIcon
                       width="18"
                       height="18"
-                      alt="Send"
-                      layout="fixed"
                     />
                   </button>
                 </div>
@@ -98,13 +86,7 @@ const RecipePage = ({ recipe, relatedRecipes }: any) => {
             <section className="grid grid-cols-2 gap-4 md:flex items-center max-w-5xl border text-[#284D76] border-[#284D76] shadow-info-box mt-12 md:mt-8 mb-12 p-3.5">
               <div className="flex items-center">
                 <div className="inline-flex mr-2 justify-center">
-                  <Image
-                    src={ThumbsUp}
-                    width="38"
-                    height="38"
-                    alt="Thumbs up"
-                    layout="fixed"
-                  />
+                  <ThumbsUpIcon width="38" height="38" />
                 </div>
                 <div className="inline-flex uppercase mr-4 font-semibold">
                   Good for:
@@ -113,13 +95,7 @@ const RecipePage = ({ recipe, relatedRecipes }: any) => {
               <div className="flex mr-8">{recipe.goodFor}</div>
               <div className="flex items-center">
                 <div className="inline-flex mr-2 justify-center">
-                  <Image
-                    src={Time}
-                    width="38"
-                    height="38"
-                    alt="Time"
-                    layout="fixed"
-                  />
+                  <TimeIcon width="38" height="38" />
                 </div>
                 <div className="inline-flex uppercase mr-4 font-semibold">
                   time:
@@ -128,13 +104,7 @@ const RecipePage = ({ recipe, relatedRecipes }: any) => {
               <div className="flex mr-8">{recipe.time.total}</div>
               <div className="flex items-center">
                 <div className="inline-flex mr-2 justify-center">
-                  <Image
-                    src={Blender}
-                    width="38"
-                    height="38"
-                    alt="Blender"
-                    layout="fixed"
-                  />
+                  <MethodIcon type={recipe.type} width="38" height="38" />
                 </div>
                 <div className="inline-flex uppercase mr-4 font-semibold">
                   makes:
@@ -187,22 +157,7 @@ const RecipePage = ({ recipe, relatedRecipes }: any) => {
                   key={recipe.slug}
                   className="group col-span-1 bg-white divide-gray-200 border border-[#B7B7B7] hover:shadow-l hover:-translate-x-[2px] hover:-translate-y-[2px]"
                 >
-                  <Link href={`/recipes/${recipe.slug}`}>
-                    <a className="flex flex-col">
-                      <Image src={SmoothiePlaceholder} alt="placeholder" />
-                      <div className="p-4 flex-col space-y-2">
-                        <span className="flex text-sm uppercase text-[#387F90]">
-                          {recipe.publicationType}
-                        </span>
-                        <span className="flex text-xl text-[#333333] leading-6 group-hover:underline decoration-[#58B4C3] decoration-[3px]">
-                          {recipe.title}
-                        </span>
-                        <span className="flex text-sm text-[#333333]">
-                          By {recipe.author.name}
-                        </span>
-                      </div>
-                    </a>
-                  </Link>
+                  <RecipeCard recipe={recipe} />
                 </li>
               ))}
             </ul>
