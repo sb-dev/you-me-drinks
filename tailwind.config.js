@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'bumblebee': '#F4D16A',
+      },
       boxShadow: {
         'sm': '2px 2px 0 #26b7c5;',
         'sm-red': '2px 2px 0 #EC6363',

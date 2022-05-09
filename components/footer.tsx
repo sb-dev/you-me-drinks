@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Power from "../public/power.png";
+import PowerFightIcon from "../assets/icons/power-fight-icon";
 
 const navigation = {
   content: [
@@ -82,7 +82,9 @@ const Footer = () => {
         </h2>
         <div className="max-w-7xl mx-auto py-8 overflow-hidden">
           <div className="-mx-5 -my-2 py-2 text-gray-500 flex flex-wrap justify-center">All our recipes are plant based and alcohol free.</div>
-          <div className="-mx-5 -my-2 py-2 flex justify-center"><Image src={Power} width="42" height="42" alt="plant based revolution"/></div>
+          <div className="-mx-5 -my-2 py-2 flex justify-center">
+            <PowerFightIcon width="42" height="42" />
+            </div>
           <div className="py-2 text-gray-500 flex flex-wrap justify-center mb-4 text-lg font-semibold text-center">Progress is inevitable... Welcome to the plant based revolution!</div>
           <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
             {navigation.content.map((item) => (
