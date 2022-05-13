@@ -1,11 +1,12 @@
-import { createRecipes, importSchema } from './main.js';
+import { LocalFaunaDbClient, importRecipe, importSchema, importSchemaLocally, readRecipes, retrieveTagsAndIngredients } from './main.js';
 import { createServerRole, updateServerRole } from './utils/roles.js'
 import { userCreation, userLogin } from './utils/functions.js'
 
 import { Command } from 'commander';
 import GraphqlClient from './utils/graphqlClient.js';
+import Listr from 'listr';
 import { createAdminUser } from './utils/mutations.js'
-import { createServerKey } from './utils/keys.js'
+import { createDatabase } from './utils/database.js'
 import dotenv from 'dotenv';
 import faunadb from 'faunadb';
 
@@ -40,18 +41,132 @@ export const cli = (args) => {
   program
     .command('setup')
     .description('run GraphQL setup commands for FaunaDB')
+    .option('-l, --local', 'Where to setup GraphQL')
     .option('-s, --setup_mode <mode>', 'Which setup mode to use', 'create')
-    .action((options) => {
-      if (options.setup_mode === 'create') {
-        throw 'Not supported yet.';
-      } else if (options.setup_mode === 'update') {
-        throw 'Not supported yet.';
+    .action(async (options) => {
+      if(options.local) {
+        const tasks = new Listr([
+          {
+            title: 'Create database',
+            task: ctx => {
+              return new Promise(async (resolve) => {
+                const mainFaunaDbClient = LocalFaunaDbClient();
+                const { secret } = await mainFaunaDbClient.query(createDatabase('ymdrinks'));
+                ctx.dbSecret = secret;
+                resolve(secret);
+              });
+            }
+          },
+          {
+            title: 'Import schema',
+            task: ctx => {
+              return new Promise(async (resolve) => {
+                const { stdout } = await importSchemaLocally(ctx.dbSecret);
+                ctx.importSchemaLogs = stdout;
+                resolve(stdout);
+              });
+            }
+          },
+          {
+            title: 'Create server key',
+            task: ctx => {
+              return new Promise(async (resolve) => {
+                const dbFaunaDbClient = LocalFaunaDbClient(ctx.dbSecret);
+                const { secret } = await dbFaunaDbClient.query(
+                  createServerRole()
+                )
+                ctx.serverSecret = secret;
+                resolve(secret);
+              });
+            }
+          },
+          {
+            title: 'Create adming user',
+            task: ctx => {
+              return new Promise(async (resolve) => {
+                const dbFaunaDbClient = LocalFaunaDbClient(ctx.dbSecret);
+                await dbFaunaDbClient.query(
+                  userCreation
+                )
+                await dbFaunaDbClient.query(
+                  userLogin
+                )
+                const localClient = GraphqlClient(process.env.GRAPHQL_ENDPOINT, ctx.dbSecret);
+                const result = await localClient.request(
+                  createAdminUser, 
+                  {
+                    email: 'test@contact.com',
+                    name: 'Test User',
+                    password: 'password'
+                  }
+                );
+          
+                ctx.adminId = result.createUser._id;
+                resolve(result);
+              });
+            }
+          },
+          {
+            title: 'Read data',
+            task: ctx => {
+              return new Promise(async (resolve) => {
+                const localClient = GraphqlClient(process.env.GRAPHQL_ENDPOINT, ctx.dbSecret);
+                const recipes = await readRecipes(localClient);
+                ctx.recipes = recipes;
+                resolve(recipes);
+              });
+            }
+          },
+          {
+            title: 'Import data',
+            task: ctx => {
+              const tasks = ctx.recipes.map(recipe => {
+                return {
+                  title: `Import ${recipe.slug}`,
+                  skip: () => {
+                    if(recipe.skip) {
+                      console.log(`Skipping ${recipe.slug}`);
+                      return true;
+                    }
+                    return false;
+                  },
+                  task: () => {
+                    return new Promise(async (resolve) => {
+                      const localClient = GraphqlClient(process.env.GRAPHQL_ENDPOINT, ctx.dbSecret);
+                      const data = await retrieveTagsAndIngredients(localClient);
+                      const result = await importRecipe(localClient, data, recipe, ctx.adminId);
+                      resolve(result);
+                    });
+                  }
+                }
+              });
+              
+              return new Listr(
+                tasks
+              );
+            }
+          }
+        ]);
+
+        tasks.run().then(ctx => {
+          console.log('-- FaunaDB successfully setup --');
+          console.log('Admin:', ctx.dbSecret);
+          console.log('Server:', ctx.serverSecret);
+        }).catch(err => {
+          console.error(err);
+        });
       } else {
-        console.error('unknown mode')
+        if (options.setup_mode === 'create') {
+          throw 'Not supported yet.';
+        } else if (options.setup_mode === 'update') {
+          throw 'Not supported yet.';
+        } else {
+          console.error('unknown mode')
+        }
       }
     });
 
-    program
+  program
     .command('login')
     .option('-e, --email <email>', 'Which email address to use')
     .option('-p, --password <password>', 'Which password to use')
@@ -82,12 +197,61 @@ export const cli = (args) => {
   program
     .command('import <entity>')
     .option('-s, --setup_mode <mode>', 'Which setup mode to use', 'create')
+    .option('-e, --endpoint <endpoint>', 'Which endpooint to use', process.env.GRAPHQL_ENDPOINT)
+    .option('-s, --secret <secret>', 'Which secret mode to use', process.env.DB_ADMIN_KEY)
+    .option('-a, --author [author]', 'Which author')
     .description('run import commands')
     .action(async (action, options) => {
       switch(action) {
         case "recipes":
           if (options.setup_mode === 'create') {
-            createRecipes(client);
+            const graphqlClient = GraphqlClient(options.endpoint, options.secret);
+            
+            const tasks = new Listr([
+              {
+                title: 'Read data',
+                task: ctx => {
+                  return new Promise(async (resolve) => {
+                    const recipes = await readRecipes(graphqlClient);
+                    ctx.recipes = recipes;
+                    resolve(recipes);
+                  });
+                }
+              },
+              {
+                title: 'Import data',
+                task: ctx => {
+                  const tasks = ctx.recipes.map(recipe => {
+                    return {
+                      title: `Import ${recipe.slug}`,
+                      skip: () => {
+                        if(recipe.skip) {
+                          return true;
+                        }
+                        return false;
+                      },
+                      task: () => {
+                        return new Promise(async (resolve) => {
+                          const data = await retrieveTagsAndIngredients(graphqlClient);
+                          const result = await importRecipe(graphqlClient, data, recipe, options.author);
+                          resolve(result);
+                        });
+                      }
+                    }
+                  });
+                  
+                  return new Listr(
+                    tasks
+                  );
+                }
+              }
+            ]);
+    
+            tasks.run().then(() => {
+              console.log('-- Recipes successfully imported --');
+            }).catch(err => {
+              console.error(err);
+            });
           } else if (options.setup_mode === 'update') {
             throw 'Not supported yet.';
           } else {
@@ -95,19 +259,16 @@ export const cli = (args) => {
           }
           break;
         case "schema":
-          importSchema();
+          const { stdout } = await importSchema(process.env.DB_DOMAIN, process.env.DB_ADMIN_KEY);
+          console.log(stdout);
           break;
         case "roles":
           if (options.setup_mode === 'create') {
-            await faunaDbclient.query(
+            const { secret } = await faunaDbclient.query(
               createServerRole
             )
 
-            const result = await faunaDbclient.query(
-              createServerKey
-            )
-
-            console.log(result)
+            console.log("Server:", secret)
           } else if (options.setup_mode === 'update') {
             await faunaDbclient.query(
               updateServerRole

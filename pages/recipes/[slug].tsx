@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { RECIPE_PAGE, TAG_PAGE, tagNameFromPath, tagPath } from '../../helpers/navigationHelpers';
+import { RECIPE_PAGE, TAG_PAGE, tagNameFromPath, tagPath } from '../../helpers/stringHelpers';
 
 import { GraphQLClient } from 'graphql-request';
 import RecipePage from '../../components/recipePage';

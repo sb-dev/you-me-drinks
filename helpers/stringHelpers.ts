@@ -1,6 +1,10 @@
 export const RECIPE_PAGE = 'recipe'
 export const TAG_PAGE = 'tag'
 
+export const capitalise = (value: String) => {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
 export const path = (value: String) => {
   return value.replace(/ /g, '-')
 }

@@ -1,3 +1,4 @@
+import { capitalise, tagFullPath } from '../helpers/stringHelpers';
 import { useEffect, useState } from 'react';
 
 import BookmarkIcon from "../assets/icons/bookmark-icon";
@@ -12,7 +13,6 @@ import RecipeCard from './recipeCard';
 import SendIcon from "../assets/icons/send-icon";
 import ThumbsUpIcon from "../assets/icons/thumbs-up-icon";
 import TimeIcon from "../assets/icons/time-icon";
-import { tagFullPath } from '../helpers/navigationHelpers';
 import { useMediaQuery } from 'react-responsive';
 
 type ImageLayout = "fixed" | "fill" | "intrinsic" | "responsive" | "raw" | undefined
@@ -28,7 +28,7 @@ const RecipePage = ({ recipe, relatedRecipes }: any) => {
   return (
     <>
       <Head>
-        <title>{recipe.title} | YouMeDrinks</title>
+        <title>{capitalise(recipe.title)} | YouMeDrinks</title>
       </Head>
       <Header />
       <main>
@@ -55,8 +55,10 @@ const RecipePage = ({ recipe, relatedRecipes }: any) => {
                 </ul>
               </nav>
               <div className="md:flex flex-column">
-                <div className="mb-3 md:mr-4 md:h-[250px] md:w-[375px]">
-                  <ImagePlaceholder type={recipe.type} width="100%" height="100%"/>
+                <div className="mb-3 md:mr-4">
+                  <div className="md:h-[250px] md:w-[375px]">
+                    <ImagePlaceholder type={recipe.type} width="100%" height="100%"/>
+                  </div>
                 </div>
                 <div>
                   <h1 className="text-5xl mb-3 capitalize">{recipe.title}</h1>
@@ -111,7 +113,7 @@ const RecipePage = ({ recipe, relatedRecipes }: any) => {
                 </div>
               </div>
               <div className="flex">
-                {recipe.servings} {recipe.type}
+                {recipe.servings} {recipe.type}(s)
               </div>
             </section>
 
@@ -123,7 +125,7 @@ const RecipePage = ({ recipe, relatedRecipes }: any) => {
                     className="mb-4 before:text-[#DF6D66]"
                     key={recipeIngredient.ingredient.name}
                   >
-                    {recipeIngredient.quantity} {recipeIngredient.ingredient.name}
+                    {capitalise(recipeIngredient.quantity)} {recipeIngredient.ingredient.name}
                     {recipeIngredient.note}
                   </li>
                 ))}
