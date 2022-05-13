@@ -72,3 +72,21 @@ export const tagById = gql`
     }
   }
 `;
+
+export const allTagsAndIngredients = gql`
+  query AllTagsAndIngredients{
+    allTags {
+      data {
+        _id
+        name
+        category
+      }
+    }
+    allIngredients {
+      data {
+        _id
+        name
+      }
+    }
+  }
+`;

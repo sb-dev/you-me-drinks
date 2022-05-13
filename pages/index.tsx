@@ -8,7 +8,7 @@ import type { NextPage } from "next";
 import RecipeCard from "../components/recipeCard";
 import { findTagsByCategory } from '../graphql/queries/tagsByCategory';
 import getConfig from 'next/config';
-import { tagFullPath } from "../helpers/navigationHelpers";
+import { tagFullPath } from "../helpers/stringHelpers";
 
 const { serverRuntimeConfig } = getConfig()
 

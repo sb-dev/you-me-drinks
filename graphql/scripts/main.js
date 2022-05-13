@@ -1,18 +1,34 @@
-import { allIngredients, allTags, recipeBySlug } from './utils/queries.js'
-import { createIngredient, createRecipe } from './utils/mutations.js'
+import { allTagsAndIngredients, recipeBySlug } from './utils/queries.js';
+import { createIngredient, createRecipe } from './utils/mutations.js';
 
 import { execa } from 'execa';
-import fs  from 'fs';
+import faunadb from 'faunadb';
+import fs from 'fs';
 import yaml from 'js-yaml';
 
-export const importSchema = async () => {
-    const { stdout } = await execa('fauna', ['upload-graphql-schema', './graphql/schema.gql', '--mode=replace']);
+const fsPromises = fs.promises;
 
-    if(stdout.includes('schema does not pass validation')) {
-      console.log(stdout);
-    } else {
-      console.log(stdout);
-    }
+export const LocalFaunaDbClient = (secret = 'secret') => {
+  return new faunadb.Client({
+    secret,
+    domain: 'localhost',
+    port: 8443,
+    scheme: 'http',
+  });
+};
+
+export const importSchemaLocally = async (secret) => {
+  return execa(
+    'fauna', 
+    ['upload-graphql-schema', './graphql/schema.gql', '--mode=replace', `--domain=localhost`, `--graphqlHost=localhost`, `--secret=${secret}`, `--graphqlPort=8084`, `--port=8443`, `--scheme=http`]
+  );
+};
+
+export const importSchema = async (domain, secret) => {
+  return execa(
+    'fauna', 
+    ['upload-graphql-schema', './graphql/schema.gql', '--mode=replace', `--domain=${domain}`, `--secret=${secret}`]
+  );
 };
 
 export const createIngredients = async (graphQLClient) => {
@@ -48,51 +64,54 @@ const tagsToConnect= (allTags, recipeTags) => {
   }).filter(element => element)
 };
 
-export const createRecipes = async (graphQLClient) => {
-  fs.readdir('./content/recipes/', async (err, files) => {
-    for (let file of files) {
-      const ingredientsData = await graphQLClient.request(allIngredients);
-      const tagsData = await graphQLClient.request(allTags);
-      
-      const recipe = yaml.load(fs.readFileSync(`./content/recipes/${file}`, 'utf8'));
-      const recipeData = await graphQLClient.request(recipeBySlug, { slug: recipe.slug });
+export const readRecipes = async (graphQLClient) => {
+  const files = await fsPromises.readdir('./content/recipes/');
+  
+  return Promise.all(files.map(async (file) => {
+    const recipe = yaml.load(fs.readFileSync(`./content/recipes/${file}`, 'utf8'));
+    const recipeData = await graphQLClient.request(recipeBySlug, { slug: recipe.slug });
 
-      if(recipeData.findRecipeBySlug) {
-        console.log(`Skipping ${recipe.slug}...`);
-        continue;
-      }
-
-      console.log(`Creating ${recipe.slug}...`);
-      
-      const input = { 
-        ...recipe,
-        primaryTags: {
-          create: tagsToCreate(tagsData.allTags.data, recipe.primaryTags),
-          connect: tagsToConnect(tagsData.allTags.data, recipe.primaryTags),
-        },
-        otherTags: {
-          create: tagsToCreate(tagsData.allTags.data, recipe.otherTags),
-          connect: tagsToConnect(tagsData.allTags.data, recipe.otherTags),
-        },
-        ingredients: {
-          create: recipe.ingredients.map(ingredient => {
-            const ingredientRow = ingredientsData.allIngredients.data.find(element => element.name === ingredient.name)
-            return {
-              ingredient: ingredientRow ? { connect: ingredientRow._id } : { create: { name: ingredient.name } },
-              quantity: ingredient.quantity,
-              note: ingredient.note
-            }
-          })
-        },
-        author: {
-          connect: recipe.author
-        }
+    if(recipeData.findRecipeBySlug) {
+      return {
+        slug: recipe.slug,
+        skip: true
       };
-
-      await graphQLClient.request(
-        createRecipe, 
-        input
-      );
+    } else {
+      return recipe;
     }
-  });
+  }));
 };
+
+export const retrieveTagsAndIngredients = (graphQLClient) => {
+  return graphQLClient.request(allTagsAndIngredients);
+}
+
+export const importRecipe = (graphQLClient, data, recipe, authorId) => {
+  return graphQLClient.request(
+    createRecipe, 
+    { 
+      ...recipe,
+      primaryTags: {
+        create: tagsToCreate(data.allTags.data, recipe.primaryTags),
+        connect: tagsToConnect(data.allTags.data, recipe.primaryTags),
+      },
+      otherTags: {
+        create: tagsToCreate(data.allTags.data, recipe.otherTags),
+        connect: tagsToConnect(data.allTags.data, recipe.otherTags),
+      },
+      ingredients: {
+        create: recipe.ingredients.map(ingredient => {
+          const ingredientRow = data.allIngredients.data.find(element => element.name === ingredient.name)
+          return {
+            ingredient: ingredientRow ? { connect: ingredientRow._id } : { create: { name: ingredient.name } },
+            quantity: ingredient.quantity,
+            note: ingredient.note
+          }
+        })
+      },
+      author: {
+        connect: authorId ? authorId : recipe.author
+      }
+    }
+  );
+}

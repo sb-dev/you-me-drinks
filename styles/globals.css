@@ -21,6 +21,7 @@ body {
 
 ul.bullet-list li::before {
   content: "\2022";
+  font-size: 1.5em;
   font-weight: bold;
   display: inline-block;
   width: 1em;

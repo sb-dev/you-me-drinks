@@ -38,12 +38,22 @@ export const updatePublicRole = q.Update(
   }
 );
 
-export const createServerRole = q.CreateRole(
+export const createServerRole = () => q.Let(
   {
-    name: SERVER_ROLE,
-    privileges: [...recipeReads]
-  }
-);
+    roleRef: q.CreateRole(
+      {
+        name: SERVER_ROLE,
+        privileges: [...recipeReads]
+      }
+    )
+  },
+  q.CreateKey({
+    role: q.Select('ref', q.Var('roleRef')),
+    data: {
+      name: "For SSR/SSG",
+    }
+  })
+)
 
 export const updateServerRole = q.Update(
   q.Role(SERVER_ROLE),
