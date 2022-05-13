@@ -1,0 +1,43 @@
+slug: virgin-moscow-mule
+title: virgin moscow mule
+publicationType: RECIPE
+description: >
+  This virgin moscow mule deserves as much credit as the original.
+primaryTags:
+  - name: mocktail
+    category: type
+    description: ""
+  - name: summer
+    category: occasion
+    description: ""
+otherTags:
+  - name: help you unwind
+    category: goodFor
+    description: ""
+goodFor: help you unwind
+time:
+  total: 5 minutes
+servings: "1"
+type: mocktail
+ingredients: 
+  - name: ice
+    quantity: ""
+    note: "" 
+  - name: fresh lime juice
+    quantity: "1 tablespoon"
+    note: "" 
+  - name: water
+    quantity: "30ml"
+    note: ""
+  - name: non-alcoholic beer
+    quantity: "90ml"
+    note: ""
+  - name: ginger ale
+    quantity: "60ml"
+    note: ""
+method:
+  - instruction: "Fill a copper mug or tall glass with ice."
+  - instruction: "Add the lime juice and water."
+  - instruction: "Top with the non-alcoholic beer and ginger ale."
+  - instruction: "Serve."
+author: "330802966348955847"

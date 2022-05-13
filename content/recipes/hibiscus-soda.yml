@@ -1,0 +1,44 @@
+slug: hisbiscus-soda
+title: Hisbiscus soda
+publicationType: RECIPE
+description: >
+  A fermented version of the Mexican drink Agua de Jamaica (Jamaica is the Mexican name for hisbiscus).
+primaryTags:
+  - name: fermented drink
+    category: type
+    description: ""
+  - name: antioxidant
+    category: goodFor
+    description: ""
+otherTags:
+  - name: mexico
+    category: region
+    description: ""
+goodFor: antioxidants · supports liver health
+time:
+  total: 20 minutes to prep, plus 3 to 10 days of resting
+servings: "6 (250ml each)"
+type: fermented drink
+ingredients: 
+  - name: water
+    quantity: 8 cups (2l)
+    note: ""
+  - name: dried hisbiscus flowers
+    quantity: 75g
+    note: ""
+  - name: granulated sugar
+    quantity: 3/4 cup (150g)
+    note: ""
+method:
+  - instruction: "Bring the water to a boil in a saucepan over high heat."
+  - instruction: "Add hisbiscus flowers, cover, reduce the heat and simmer for 15 minutes."
+  - instruction: "Strain the liquid into a heat proof bowl and stir in sugar until disolved."
+  - instruction: "Let the liquid cool to room temperature."
+  - instruction: "Pour the liquid into a big masson jar and make sure to leave about 5cm of space at the top."
+  - instruction: "Cover the jar (with a clean cloth, kitchen towel, paper towel, or coffee filter) and secure it with a rubber band."
+  - instruction: "Write down the brewing date on a piece of masking tape and stick it on the jar."
+  - instruction: "Let the jar sit at room temperature until the liquid starts bubbling (this may take anywhere from 3 to 10 days). Stir daily to prevent mold from forming."
+  - instruction: "Let it bubble for a day or two and taste it. It should be less sweet. If not, let bubble another couple of days and taste it again."
+  - instruction: "Once you like the taste, bottle it and refrigerate it (we recommend using beer bottles because the carbonation may be strong)."
+  - instruction: "Failing to refrigerate it may result in exploding bottles."
+author: "330802966348955847"

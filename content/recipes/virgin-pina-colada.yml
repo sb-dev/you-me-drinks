@@ -1,0 +1,47 @@
+slug: virgin-pina-colada
+title: Virgin piña colada
+publicationType: RECIPE
+description: >
+  Refreshing and rich tasting, this drink will make you forget alcohol.
+primaryTags:
+  - name: mocktail
+    category: type
+    description: ""
+  - name: summer
+    category: occasion
+    description: ""
+otherTags:
+  - name: refreshing
+    category: goodFor
+    description: ""
+goodFor: refreshing
+time:
+  total: 5 minutes
+servings: "2 to 3"
+type: mocktail
+ingredients: 
+  - name: frozen pineapple chunks
+    quantity: 1 1/2 cups (240g)
+    note: ""
+  - name: ice
+    quantity: "1/4 cup (35g)"
+    note: ""
+  - name: coconut milk
+    quantity: 3/4 cup (160ml)
+    note: ""
+  - name: pineapple juice
+    quantity: 3/4 cup (160ml)
+    note: ""
+  - name: coconut sugar
+    quantity: 1 to 3 tablespoons
+    note: ", optional"
+  - name: pineapple wedges
+    quantity: ""
+    note: ", for garnish"
+  - name: maraschino cherries
+    quantity: ""
+    note: ", for garnish"
+method:
+  - instruction: "Add frozen pineapple chunks, ice, coconut milk, pineapple juice and brown sugar, if using to a blender and blend until smooth."
+  - instruction: "Serve and garnish with the pineapple wedges and maraschino cherries."
+author: "330802966348955847"

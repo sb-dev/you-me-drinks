@@ -1,0 +1,43 @@
+slug: mushroom-brew
+title: Mushroom brew
+publicationType: RECIPE
+description: >
+  With the lion's mane powder and the chaga powder, this drinks has has strong anti-inflammatory, antioxidant and immune-boosting abilities.
+primaryTags:
+  - name: coffee
+    category: type
+    description: ""
+  - name: antioxidant
+    category: goodFor
+    description: ""
+otherTags:
+  - name: deep work
+    category: occasion
+    description: ""
+goodFor: antioxidants · deep work · boost of creativity
+time:
+  total: 5 minutes
+servings: "1 cup"
+type: coffee
+ingredients: 
+  - name: chaga mushroom powder
+    quantity: 1 teaspoon
+    note: "" 
+  - name: lion's mane powder
+    quantity: 1 teaspoon
+    note: ""
+  - name: oat milk
+    quantity: About 1 cup (200ml)
+    note: ", or almond milk"
+  - name: brewed black coffee
+    quantity: About 1/2 cup (100ml)
+    note: ""
+  - name: maple syrup
+    quantity: 1 teaspoon
+    note: ", optional"
+method:
+  - instruction: "Add both mushroom powders and milk to a small saucepan."
+  - instruction: "Wisk to combine and remove all lumps."
+  - instruction: "Add coffee and bring to a simmer."
+  - instruction: "Serve once the mixture is simmering and everything is combined."
+author: "330802966348955847"

@@ -1,0 +1,51 @@
+slug: turmeric-shot
+title: Turmeric shot
+publicationType: RECIPE
+description: >
+  A powerful energising drink with immune system boosting abilities.
+primaryTags:
+  - name: shot
+    category: type
+    description: ""
+  - name: immune system support
+    category: goodFor
+    description: ""
+otherTags:
+  - name: deep work
+    category: occasion
+    description: ""
+goodFor: immune system support · deep work · boost of creativity
+time:
+  total: 5 minutes to prep
+servings: "6"
+type: shot
+ingredients: 
+  - name: apples
+    quantity: "2"
+    note: "" 
+  - name: oranges
+    quantity: "2"
+    note: "" 
+  - name: lemon
+    quantity: "1"
+    note: "" 
+  - name: fresh ginger
+    quantity: "6cm piece"
+    note: "" 
+  - name: ground turmeric
+    quantity: "1 1/2 teaspoon"
+    note: "" 
+  - name: cayenne pepper
+    quantity: "1/2 teaspoon"
+    note: "" 
+  - name: water
+    quantity: "about 1/2 cup (100ml)"
+    note: ""
+method:
+  - instruction: "Core and chop the apples in pieces."
+  - instruction: "Peel the oranges and the lemon and separate into segments."
+  - instruction: "Peel the ginger."
+  - instruction: "Add everything to a blender and blend until you have a thick liquid paste."
+  - instruction: "Strain the mixture through a sieve or nut milk bag."
+  - instruction: "Pour into glasses and serve."
+author: "330802966348955847"
