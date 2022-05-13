@@ -1,0 +1,58 @@
+slug: easy-going-mojito
+title: Easy going mojito
+publicationType: RECIPE
+description: >
+  A mellow twist on a popular cocktail.
+primaryTags:
+  - name: mocktail
+    category: type
+    description: ""
+  - name: summer
+    category: occasion
+    description: ""
+  - name: antioxidant
+    category: goodFor
+    description: ""
+otherTags:
+  - name: source of probiotics
+    category: goodFor
+    description: ""
+goodFor: antioxidants · source of probiotics
+time:
+  total: 5 minutes
+servings: "2"
+type: mocktail
+ingredients: 
+  - name: frozen raspberries
+    quantity: 1 1/4 cups (100g)
+    note: ""
+  - name: coconut sugar
+    quantity: 2 teaspoons
+    note: ""
+  - name: ice cubes
+    quantity: "hanful of"
+    note: ""
+  - name: lime
+    quantity: "juice of half a"
+    note: ""
+  - name: apple cide vinegar
+    quantity: "1 tablespoon"
+    note: ""
+  - name: mint spring
+    quantity: "1"
+    note: ""
+  - name: kombucha
+    quantity: "1 cup (240ml)"
+    note: ", works best with raspberry kombucha"
+  - name: sparkling water
+    quantity: "2/3 cup (150ml)"
+    note: ""
+  - name: lime zest
+    quantity: "Twist of"
+    note: ", to serve"
+method:
+  - instruction: "Muddle two leaves of mint with the raspberries, sugar, ice, lime juice and apple cider vinegar."
+  - instruction: "Pour into a cold glasses."
+  - instruction: "Pour in kombucha and sparkling water and mix everything together gently."
+  - instruction: "Garnish with the remaining mint leaves and a twist of lime zest."
+author: "330802966348955847"

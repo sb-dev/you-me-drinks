@@ -1,0 +1,53 @@
+slug: virgin-old-fashioned
+title: Virgin old fashioned
+publicationType: RECIPE
+description: >
+  The bitter taste and smoky notes makes barley tea an excellent substitute for bourbon whiskey.
+primaryTags:
+  - name: mocktail
+    category: type
+    description: ""
+  - name: after dinner
+    category: occasion
+    description: ""
+otherTags:
+  - name: help you unwind
+    category: goodFor
+    description: ""
+goodFor: help you unwind · good for digestion
+time:
+  total: 10 minutes to prep, 2 hours to steep the tea
+servings: "1"
+type: mocktail
+ingredients: 
+  - name: water
+    quantity: 4 cups (960ml)
+    note: ", cold or room-temperature"
+  - name: barley tea
+    quantity: 1 bag
+    note: ", or 1 tablespoon roasted barley grains"
+  - name: sugar cube
+    quantity: "1"
+    note: ""
+  - name: orange slice
+    quantity: "1"
+    note: ""
+  - name: angustura bitter
+    quantity: 2 dashes
+    note: ""
+  - name: ice
+    quantity: ""
+    note: ""
+  - name: barley tea infusion
+    quantity: 60ml
+    note: ""
+  - name: maraschino cherry
+    quantity: "1"
+    note: ", for garnish"
+method:
+  - instruction: "For the tea, mix the water and the barley into a pitcher, refrigerate for 2 hours and discard the barley."
+  - instruction: "Muddle the sugar cube, the orange slice and the bitters together."
+  - instruction: "Then fill with ice and add the tea."
+  - instruction: "Stir until the sugar dissolves."
+  - instruction: "Garnish with the cherry."
+author: "330802966348955847"
