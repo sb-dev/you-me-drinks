@@ -1,11 +1,25 @@
+import { useContext, useEffect } from "react";
+
 import Footer from "../components/footer";
 import Head from "next/head";
 import Header from "../components/header";
+import { NavigationContext } from "../context/navigationContext";
 import RecipeCard from "./recipeCard";
 
 const defaultDescription = 'Original recipes, tested, tasted, and approved by YouMeDrinks.'
 
-const RecipesPage = ({header, description, recipes}: any) => (
+const RecipesPage = ({header, path, description, recipes}: any) => {
+  const navigationContext = useContext(NavigationContext)
+
+  useEffect(() => {
+    if(navigationContext){
+      navigationContext.setNavigation([{
+        name: header, href: path, current: false
+      }])
+    }
+  }, [])
+  
+  return (
   <div className="bg-[#FBF9EF]">
       <Head>
         <title>YouMeDrinks</title>
@@ -39,6 +53,6 @@ const RecipesPage = ({header, description, recipes}: any) => (
 
       <Footer />
     </div>
-)
+)}
 
 export default RecipesPage;

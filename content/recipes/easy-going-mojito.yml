@@ -23,6 +23,9 @@ time:
 servings: "2"
 type: mocktail
 ingredients: 
+  - name: mint spring
+    quantity: "1"
+    note: ""
   - name: frozen raspberries
     quantity: 1 1/4 cups (100g)
     note: ""
@@ -38,9 +41,6 @@ ingredients:
   - name: apple cide vinegar
     quantity: "1 tablespoon"
     note: ""
-  - name: mint spring
-    quantity: "1"
-    note: ""
   - name: kombucha
     quantity: "1 cup (240ml)"
     note: ", works best with raspberry kombucha"
@@ -51,8 +51,8 @@ ingredients:
     quantity: "Twist of"
     note: ", to serve"
 method:
-  - instruction: "Muddle two leaves of mint with the raspberries, sugar, ice, lime juice and apple cider vinegar."
-  - instruction: "Pour into a cold glasses."
-  - instruction: "Pour in kombucha and sparkling water and mix everything together gently."
+  - instruction: "Muddle a few leaves of mint with the raspberries, sugar, lime juice and apple cider vinegar."
+  - instruction: "Divide the mixture into two glasses."
+  - instruction: "Top up each glass with the ice cubes, pour in the kombucha and sparkling water and mix everything together gently."
   - instruction: "Garnish with the remaining mint leaves and a twist of lime zest."
 author: "330802966348955847"

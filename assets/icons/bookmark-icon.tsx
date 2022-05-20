@@ -1,4 +1,4 @@
-const BookmarkIcon = ({ width, height }: any) => (
+const BookmarkIcon = ({ width, height, className }: any) => (
   <svg
     id="Bookmark"
     enableBackground="new 0 0 512.019 512.019"
@@ -6,7 +6,7 @@ const BookmarkIcon = ({ width, height }: any) => (
     viewBox="0 0 512.019 512.019"
     width={width}
     xmlns="http://www.w3.org/2000/svg"
-    className="inline-block"
+    className={`inline-block ${className}`}
   >
     <g>
       <g id="_x32_2_bookmark">

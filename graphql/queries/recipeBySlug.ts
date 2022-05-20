@@ -10,6 +10,7 @@ export const recipeBySlug = gql`
       servings,
       type,
       goodFor,
+      slug,
       time {
         total
       },

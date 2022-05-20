@@ -1,9 +1,12 @@
+import { useContext, useEffect } from "react";
+
 import { FcLink } from "react-icons/fc";
 import Footer from "../components/footer";
 import { GraphQLClient } from 'graphql-request';
 import Head from "next/head";
 import Header from "../components/header";
 import Link from 'next/link';
+import { NavigationContext } from "../context/navigationContext";
 import type { NextPage } from "next";
 import RecipeCard from "../components/recipeCard";
 import { findTagsByCategory } from '../graphql/queries/tagsByCategory';
@@ -13,6 +16,14 @@ import { tagFullPath } from "../helpers/stringHelpers";
 const { serverRuntimeConfig } = getConfig()
 
 const Home: NextPage = ({featuredRecipes, recipesByCategory, otherRecipes}: any) => {
+  const navigationContext = useContext(NavigationContext)
+
+  useEffect(() => {
+    if(navigationContext){
+      navigationContext.setNavigation([])
+    }
+  }, [])
+  
   return (
     <div className="bg-[#FBF9EF]">
       <Head>

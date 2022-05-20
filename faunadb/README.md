@@ -15,11 +15,21 @@ docker run -d -p 8443:8443 -p 8084:8084 --name ymdrinksDb \
     sb-dev/faunadb:latest --config /etc/fauna.yml 
 ```
 
-Endpoint: http://localhost:8443
+### Config
+
+```
+DB_DOMAIN=localhost
+GRAPHQL_ENDPOINT=http://localhost:8084/graphql
+```
 
 ### Remote
 
-Endpoint: https://graphql.eu.fauna.com/graphql
+### Config
+
+```
+DB_DOMAIN=db.eu.fauna.com
+GRAPHQL_ENDPOINT=https://graphql.eu.fauna.com/graphql
+```
 
 ## Queries
 
