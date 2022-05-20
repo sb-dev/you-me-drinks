@@ -22,7 +22,7 @@ const Recipe = (page: any) => {
     )
   } else if(page.pageType === TAG_PAGE) {
     return (
-      <RecipesPage header={`${page.tagName} Recipes`} description={page.tagDescription} recipes={page.recipes} />
+      <RecipesPage header={`${page.tagName} Recipes`} path={tagPath(page.tagName)} description={page.tagDescription} recipes={page.recipes} />
     )
   } else {
     return (<h1>Dude, Where is My Car?</h1>)

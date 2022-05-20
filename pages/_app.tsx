@@ -1,3 +1,4 @@
+import 'react-toastify/dist/ReactToastify.css'
 import '../styles/globals.css'
 
 import {
@@ -5,8 +6,11 @@ import {
 } from "@apollo/client"
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import NavigationContextProvider from '../context/navigationContext'
 import PlausibleProvider from 'next-plausible'
-import graphqlClient from '../graphql/client'
+import { ToastContainer } from 'react-toastify'
+
+// import graphqlClient from '../graphql/client'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -14,11 +18,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <ApolloProvider client={graphqlClient}>
+      {/* <ApolloProvider client={graphqlClient}> */}
         <PlausibleProvider trackLocalhost={false} domain="youmedrinks.com">
-          <Component {...pageProps} />
+          <NavigationContextProvider>
+            <Component {...pageProps} />
+            <ToastContainer />
+          </NavigationContextProvider>
         </PlausibleProvider>
-      </ApolloProvider>
+      {/* </ApolloProvider> */}
     </>
   )
 }

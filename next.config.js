@@ -2,8 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   publicRuntimeConfig: {
-    graphqlEndpoint: process.env.GRAPHQL_ENDPOINT,
-    graphqlKey: process.env.GRAPHQL_KEY
+    host: "https://youmedrinks.com",
+    graphqlEndpoint: process.env.GRAPHQL_ENDPOINT
   },
   serverRuntimeConfig: {
     graphqlEndpoint: process.env.GRAPHQL_ENDPOINT,

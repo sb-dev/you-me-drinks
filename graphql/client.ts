@@ -18,7 +18,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: `Bearer ${token ? token : publicRuntimeConfig.graphqlKey}`
+      // authorization: `Bearer ${token ? token : publicRuntimeConfig.graphqlKey}`
     }
   }
 })
